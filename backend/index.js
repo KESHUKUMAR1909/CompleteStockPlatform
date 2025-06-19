@@ -20,11 +20,15 @@ const sendResetEmail = require('../backend/Utils/sendResetEmail.js');
 
 const app = express();
 
-// Middleware
+// ✅ CORS Configuration
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: [
+    'http://localhost:3000',
+    process.env.CLIENT_URL || 'https://complete-stock-platform.vercel.app'
+  ],
   credentials: true
 }));
+
 app.use(cookieParser());
 app.use(express.json());
 

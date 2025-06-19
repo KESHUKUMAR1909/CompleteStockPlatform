@@ -26,7 +26,7 @@ export const loginUser = (formData) => {
 export const signupUser = (formData) => {
   return (dispatch) => {
     return axios
-      .post("http://localhost:3002/signup", formData)
+      .post("https://complete-stock-platform.vercel.app/signup", formData)
       .then((res) => {
         dispatch({ type: AUTH_SUCCESS, payload: res.data.user });
         return res.data;
