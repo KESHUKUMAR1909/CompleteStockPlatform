@@ -21,13 +21,21 @@ const sendResetEmail = require('../backend/Utils/sendResetEmail.js');
 const app = express();
 
 // ✅ CORS Configuration
-app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    process.env.CLIENT_URL || 'https://complete-stock-platform.vercel.app'
-  ],
-  credentials: true
-}));
+const cors = require("cors");
+
+// ✅ ADD your frontend Vercel URL here:
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://complete-stock-platform-oykb9j3oe-keshu-kumars-projects.vercel.app",
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
+
 
 app.use(cookieParser());
 app.use(express.json());
