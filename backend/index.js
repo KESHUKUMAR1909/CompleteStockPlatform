@@ -22,11 +22,24 @@ const app = express();
 
 
 
-// ✅ ADD your frontend Vercel URL here:
+// ✅ Correct CORS Configuration
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://complete-stock-platform-oykb9j3oe-keshu-kumars-projects.vercel.app",
+  "https://complete-stock-platform.vercel.app", // your live frontend URL
 ];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 app.use(
   cors({
