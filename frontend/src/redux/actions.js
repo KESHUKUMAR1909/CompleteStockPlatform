@@ -3,8 +3,10 @@ import { AUTH_SUCCESS, AUTH_FAILURE, LOGOUT } from "./actionTypes.js";
 
 const API = process.env.REACT_APP_API_URL;
 
+
 // ✅ LOGIN
 export const loginUser = (formData) => {
+  console.log(API);
   return (dispatch) => {
     return axios
       .post(`${API}/login`, formData, { withCredentials: true })
@@ -24,6 +26,7 @@ export const loginUser = (formData) => {
 
 // ✅ SIGNUP
 export const signupUser = (formData) => {
+  console.log(API);
   return (dispatch) => {
     return axios
       .post(`${API}/signup`, formData, { withCredentials: true })
