@@ -20,8 +20,7 @@ const sendResetEmail = require('../backend/Utils/sendResetEmail.js');
 
 const app = express();
 
-// ✅ CORS Configuration
-const cors = require("cors");
+
 
 // ✅ ADD your frontend Vercel URL here:
 const allowedOrigins = [
