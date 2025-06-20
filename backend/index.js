@@ -25,7 +25,7 @@ const app = express();
 // ✅ Correct CORS Configuration
 const allowedOrigins = [
   "http://localhost:3000",
-  "https://complete-stock-platform.vercel.app", // your live frontend URL
+  "https://completestockplatform.onrender.com", // your live frontend URL
 ];
 
 app.use(
