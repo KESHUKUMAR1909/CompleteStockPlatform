@@ -23,23 +23,23 @@ const app = express();
 
 
 
+// 1) List the front‑end origins you trust (exact protocol + host + port)
 const allowedOrigins = [
-  'https://complete-stock-platform-49r211wcw-keshu-kumars-projects.vercel.app',
-  // you can add more here if needed, e.g. localhost for dev:
-  'http://localhost:3000'
+  'https://complete-stock-platform-d74zn6kno-keshu-kumars-projects.vercel.app',
+  'http://localhost:3000',        // add your dev URL if needed
 ];
 
+// 2) Configure CORS
 app.use(cors({
-  origin: function(origin, callback) {
-    // allow requests with no origin (like mobile apps or curl)
+  origin: (origin, callback) => {
+    // allow requests with no origin (mobile apps, curl)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = `The CORS policy for this site does not allow access from the specified Origin: ${origin}`;
-      return callback(new Error(msg), false);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
     }
-    return callback(null, true);
+    return callback(new Error(`CORS rejection: ${origin}`), false);
   },
-  credentials: true,           // <— required for setting cookies
+  credentials: true,                   // ← allows cookies/auth headers
   methods: ['GET','POST','PUT','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization']
 }));
