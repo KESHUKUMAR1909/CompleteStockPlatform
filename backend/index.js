@@ -297,6 +297,10 @@ app.post('/reset-password', async (req, res) => {
   }
 });
 
+app.get('/',(req,res)=>{
+  res.send("Welcome to the backend");
+})
+
 // Start Server
 const startServer = async () => {
   try {
