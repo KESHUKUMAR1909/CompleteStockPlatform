@@ -22,32 +22,9 @@ const app = express();
 
 
 
-// ✅ Correct CORS Configuration
-const allowedOrigins = [
-  "http://localhost:3000",
-  "https://completestockplatform.onrender.com", // your live frontend URL
-];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
-
+app.use(cors());
 
 app.use(cookieParser());
 app.use(express.json());
