@@ -29,7 +29,7 @@ const Hero = () => {
       if (showSignup) {
         const res = await dispatch(signupUser(formData));
         if (res) {
-            navigate('/home')
+            navigate('/dashboard')
             
         }
       } else {
@@ -39,7 +39,7 @@ const Hero = () => {
         };
         const res = await dispatch(loginUser(loginData));
         if (res) {
-           navigate('/home')
+           navigate('/dashboard')
         }
       }
     } catch (error) {
