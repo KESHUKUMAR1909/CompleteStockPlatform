@@ -25,8 +25,8 @@ const app = express();
 
 // 1) List the front‑end origins you trust (exact protocol + host + port)
 const allowedOrigins = [
-  'https://complete-stock-platform.vercel.app/',
-  'http://localhost:3000',        // add your dev URL if needed
+  'https://complete-stock-platform.vercel.app', // ✅ removed slash
+  'http://localhost:3000',
 ];
 
 // 2) Configure CORS
@@ -40,8 +40,8 @@ app.use(cors({
     return callback(new Error(`CORS rejection: ${origin}`), false);
   },
   credentials: true,                   // ← allows cookies/auth headers
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(cookieParser());
@@ -89,7 +89,7 @@ app.get('/allOrders', authMiddleware, async (req, res) => {
 
 app.post('/newOrder', authMiddleware, async (req, res) => {
   try {
-    const { name, qty, price, mode , user } = req.body;
+    const { name, qty, price, mode, user } = req.body;
 
     if (!name || !qty || !price || !mode || !user) {
       return res.status(400).send("Missing required fields");
@@ -303,7 +303,7 @@ app.post('/reset-password', async (req, res) => {
   }
 });
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
   res.send("Welcome to the backend");
 })
 
