@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-const API=REACT_APP_API_URL;
+const API=import.meta.env.VITE_REACT_APP_API_URL;
 const Holdings = () => {
   const [holdingsData, setHoldingsData] = useState([]);  // start as array
   const [loading, setLoading] = useState(true);

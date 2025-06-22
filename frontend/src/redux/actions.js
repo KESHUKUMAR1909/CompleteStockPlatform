@@ -2,7 +2,7 @@ import axios from "axios";
 import { AUTH_SUCCESS, AUTH_FAILURE, LOGOUT  } from "./actionTypes.js";
 
 // const API = process.env.REACT_APP_API_URL;
-const API =REACT_APP_API_URL;
+const API =import.meta.env.VITE_REACT_APP_API_URL;;
 
 
 // ✅ LOGIN
