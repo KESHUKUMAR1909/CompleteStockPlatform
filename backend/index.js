@@ -87,18 +87,20 @@ app.get('/allOrders', authMiddleware, async (req, res) => {
 });
 
 
+
 app.post('/newOrder', authMiddleware, async (req, res) => {
   try {
-    const { name, qty, price, mode, user } = req.body;
+    const userId = req.userId; // ✅ this comes from your auth middleware
+    const { name, qty, price, mode } = req.body;
 
-    if (!name || !qty || !price || !mode || !user) {
+    if (!name || !qty || !price || !mode) {
       return res.status(400).send("Missing required fields");
     }
 
     const parsedQty = Number(qty);
     const parsedPrice = Number(price);
 
-    const existingOrder = await OrdersModel.findOne({ name, mode, user });
+    const existingOrder = await OrdersModel.findOne({ name, mode, user: userId });
 
     if (mode === "BUY") {
       if (existingOrder) {
@@ -166,6 +168,7 @@ app.post('/newOrder', authMiddleware, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
 
 // Signup
 app.post('/signup', async (req, res) => {
