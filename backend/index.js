@@ -25,7 +25,7 @@ const app = express();
 
 // 1) List the front‑end origins you trust (exact protocol + host + port)
 const allowedOrigins = [
-  'https://complete-stock-platform-d74zn6kno-keshu-kumars-projects.vercel.app',
+  'https://complete-stock-platform.vercel.app/',
   'http://localhost:3000',        // add your dev URL if needed
 ];
 
