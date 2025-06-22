@@ -1,6 +1,6 @@
 // utils/placeOrder.js
 export async function placeOrder(name, qty, price, mode) {
-  const API=import.meta.env.VITE_REACT_APP_API_URL;
+  const API=process.env.REACT_APP_API_URL;
   // 1️⃣ Read the stored user object
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   const userId = user._id;
