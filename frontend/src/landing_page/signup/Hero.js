@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, signupUser } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
-
+import { forgotPassword as forgotPasswordAction } from '../../redux/actions'; 
 const Hero = () => {
   const dispatch = useDispatch();
   const { user, error } = useSelector((state) => state);
@@ -21,16 +21,21 @@ const Hero = () => {
 
 
 
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       if (showSignup) {
         const res = await dispatch(signupUser(formData));
+        console.log(res , res.data , res.user)
         if (res) {
-            navigate('/dashboard')
-            
+          localStorage.setItem('login', true);
+          localStorage.setItem('user', JSON.stringify(res.user));
+        }
+        if (res) {
+          navigate('/dashboard')
+
         }
       } else {
         const loginData = {
@@ -38,8 +43,11 @@ const Hero = () => {
           password: formData.password,
         };
         const res = await dispatch(loginUser(loginData));
+         console.log(res , res.data , res.user)
         if (res) {
-           navigate('/dashboard')
+          localStorage.setItem('login', true);
+          localStorage.setItem('user', JSON.stringify(res.body));
+          navigate('/dashboard')
         }
       }
     } catch (error) {

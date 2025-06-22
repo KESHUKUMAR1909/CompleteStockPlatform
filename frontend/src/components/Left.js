@@ -33,7 +33,7 @@ const Left = () => {
       <div
         className="p-2"
         style={{
-          height: 'calc(100vh - 20vh)', // adjust if top section height changes
+          height: 'calc(100vh - 10vh)', // adjust if top section height changes
           overflowY: 'scroll',
           scrollbarWidth: 'thin', // Firefox
         }}

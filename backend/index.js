@@ -75,19 +75,30 @@ app.get('/allPositions', authMiddleware, async (req, res) => {
   res.json(userPositions);
 });
 
+app.get('/allOrders', authMiddleware, async (req, res) => {
+  console.log("Entered in it")
+  try {
+    const orders = await OrdersModel.find({ user: req.userId }).sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Server Error");
+  }
+});
+
+
 app.post('/newOrder', authMiddleware, async (req, res) => {
   try {
-    const userId = req.userId;
-    const { name, qty, price, mode } = req.body;
+    const { name, qty, price, mode , user } = req.body;
 
-    if (!name || !qty || !price || !mode) {
+    if (!name || !qty || !price || !mode || !user) {
       return res.status(400).send("Missing required fields");
     }
 
     const parsedQty = Number(qty);
     const parsedPrice = Number(price);
 
-    const existingOrder = await OrdersModel.findOne({ name, mode, user: userId });
+    const existingOrder = await OrdersModel.findOne({ name, mode, user });
 
     if (mode === "BUY") {
       if (existingOrder) {
@@ -242,7 +253,7 @@ app.post('/forgot', async (req, res) => {
     const resetLink = `http://localhost:3002/reset-password?token=${token}`;
     await sendResetEmail(user.email, resetLink);
 
-    res.json({ message: "Reset link sent to email" });
+    res.json({ message: "Reset link sent to email Please Check You Email" });
   } catch (err) {
     console.error("Forgot password error:", err);
     res.status(500).json({ message: "Server error" });

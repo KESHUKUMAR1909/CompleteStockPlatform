@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Tooltip, Grow } from "@mui/material";
 import {
   BarChartOutlined,
@@ -7,6 +7,7 @@ import {
   MoreHoriz,
 } from "@mui/icons-material";
 import { watchlist } from "../data/data.js";
+import OpenBuySellWindow from "./context/OpenBuySellWindow.js";
 
 const WatchList = () => {
   return (
@@ -15,7 +16,6 @@ const WatchList = () => {
         <input
           type="text"
           name="search"
-          id="search"
           placeholder="Search eg: infy, bse, nifty fut weekly, gold mcx"
           className="form-control me-2"
         />
@@ -55,20 +55,32 @@ const WatchListItem = ({ stock }) => {
         </div>
       </div>
 
-      {showWatchlistActions && <WatchListActions />}
+      {showWatchlistActions && <WatchListActions stock={stock} />}
     </li>
   );
 };
 
-const WatchListActions = () => {
+const WatchListActions = ({ stock }) => {
+  const { setIsOpen, setType, setStockName , stockName} = useContext(OpenBuySellWindow);
+
+  const handleClick = (actionType) => {
+    setStockName(stock.name);
+    setType(actionType);
+    setIsOpen(true);
+  };
+
   return (
     <div className="d-flex gap-2">
       <Tooltip title="Buy (B)" placement="top" arrow TransitionComponent={Grow}>
-        <button className="btn btn-sm btn-success">Buy</button>
+        <button className="btn btn-sm btn-success" onClick={() => handleClick("buy")}>
+          Buy
+        </button>
       </Tooltip>
 
       <Tooltip title="Sell (S)" placement="top" arrow TransitionComponent={Grow}>
-        <button className="btn btn-sm btn-danger">Sell</button>
+        <button className="btn btn-sm btn-danger" onClick={() => handleClick("sell")}>
+          Sell
+        </button>
       </Tooltip>
 
       <Tooltip title="Analytics (A)" placement="top" arrow TransitionComponent={Grow}>

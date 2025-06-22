@@ -17,19 +17,19 @@ function Navbar() {
                         <form className="d-flex" role="search">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <Link className="nav-link active" aria-current="page" to="/signup">Signup</Link>
+                                    <Link className="nav-link active ms-4" aria-current="page" to="/signup">Signup</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" to="/about">About</Link>
+                                    <Link className="nav-link active ms-4" to="/about">About</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" to="/product">Product</Link>
+                                    <Link className="nav-link active ms-4" to="/product">Product</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" to="/pricing">Pricing</Link>
+                                    <Link className="nav-link active ms-4" to="/pricing">Pricing</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link active" to="/support">Support</Link>
+                                    <Link className="nav-link active ms-4" to="/support">Support</Link>
                                 </li>
                             </ul>
                         </form>

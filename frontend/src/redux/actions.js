@@ -1,7 +1,8 @@
 import axios from "axios";
-import { AUTH_SUCCESS, AUTH_FAILURE, LOGOUT } from "./actionTypes.js";
+import { AUTH_SUCCESS, AUTH_FAILURE, LOGOUT  } from "./actionTypes.js";
 
-const API = process.env.REACT_APP_API_URL;
+// const API = process.env.REACT_APP_API_URL;
+const API =REACT_APP_API_URL;
 
 
 // ✅ LOGIN
@@ -45,18 +46,41 @@ export const signupUser = (formData) => {
 };
 
 // ✅ LOGOUT
+
 export const logoutUser = () => {
   return (dispatch) => {
     axios
-      .post(`${API}/api/logout`, {}, { withCredentials: true })
+      .post(`${API}/api/logout`, {}, { withCredentials: true }) // ensures cookies are included
       .then(() => {
         dispatch({ type: LOGOUT });
+
+        // ✅ Clear localStorage
+        localStorage.clear();
+
+        // ✅ Clear client-side cookies
+        document.cookie.split(";").forEach(cookie => {
+          const name = cookie.split("=")[0].trim();
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        });
+
+        // ✅ Optional: redirect or reload
+        window.location.href = "/";
       })
       .catch(() => {
-        dispatch({ type: LOGOUT }); // fallback logout
+        dispatch({ type: LOGOUT });
+
+        // Fallback cleanup
+        localStorage.clear();
+        document.cookie.split(";").forEach(cookie => {
+          const name = cookie.split("=")[0].trim();
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        });
+
+        window.location.href = "/";
       });
   };
 };
+
 
 // ✅ FETCH USER
 export const fetchUser = () => {
@@ -71,3 +95,4 @@ export const fetchUser = () => {
       });
   };
 };
+
